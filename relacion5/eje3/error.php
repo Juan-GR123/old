@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Esta es la p&aacute;gin error</h2>
+    <h2>Esta es la p&aacute;gina de error</h2>
+<!--Comentario-->
 </body>
 </html>
