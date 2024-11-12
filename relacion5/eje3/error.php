@@ -7,6 +7,5 @@
 </head>
 <body>
     <h2>Esta es la p&aacute;gina de error</h2>
-<!--Comentario-->
 </body>
 </html>
