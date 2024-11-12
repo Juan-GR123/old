@@ -10,10 +10,10 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $usuario = $_POST['usuario'] ?? '';
-        $contrasena = $_POST['contrasena'] ?? '';
+        $contrasena = (int)$_POST['contrasena'] ?? '';
 
 
-        if($usuario==="usuario" && $contrasena==="1234"){
+        if($usuario==="usuario" && $contrasena===1234){
            header("location:http://localhost/old/relacion5/eje1/index.php");
         }else{
             header("location:http://localhost/old/relacion5/eje3/error.php");
