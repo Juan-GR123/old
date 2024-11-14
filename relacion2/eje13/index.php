@@ -39,7 +39,7 @@
                     $found = true;
                 }
                 if($found){
-                    $r .= $str[$i];
+                    $r .= $str[$i];//va concatenando las letras que van despues del punto
                 }
             }
             return $r;
