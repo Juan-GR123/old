@@ -10,15 +10,18 @@
     <?php 
     function metodo(&$alumnos){
         echo "Alumnos" . " ". "Nota<br>";
-        arsort($alumnos);
-        foreach($alumnos as $values){
-          echo $values['Nombre'] . " ". $values['nota']."<br>";
+        asort($alumnos);
+        foreach($alumnos as $key => $values){
+          echo $key . " ". $values ."<br>";
         }
     }
-      $alumnos = [ ['Nombre'=>'Jose','nota'=>10],
-      ['Nombre'=>'Pedro','nota'=>8],
-      ['Nombre'=>'Ana','nota'=>9],
-      ['Nombre'=>'Cap','nota'=>10]];
+
+
+      $alumnos = [
+      'Jose'=>10,
+      'Pedro' =>8,
+      'Ana' =>9,
+      'Cap' =>10];
 
   
       metodo($alumnos);
@@ -39,21 +42,21 @@
     (isset($_POST["Nota"]) && !empty($_POST["Nota"]))) {
        $nombre1 = htmlspecialchars($_POST["Nombre"]);
        $nota1= htmlspecialchars($_POST["Nota"]);
-       $array= ['Nombre'=>$nombre1,'nota'=>$nota1];
-       array_push($alumnos,$array);
-       
-       }
+       $alumnos[$nombre1]=$nota1;
        metodo($alumnos);
+       media($alumnos);
+       }
+       
        
        function media($alumnos){
         $contador=0;
-        foreach($alumnos as $values){
-             $contador+= (int)$values['nota'];
+        foreach($alumnos as $key => $values){
+             $contador+= (int)$values;
           }
           $contador=$contador/count($alumnos);
           echo "media: " . $contador . "<br>";
        }
-       media($alumnos);
+       
        
     ?>
 </body>
