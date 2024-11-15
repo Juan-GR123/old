@@ -10,7 +10,7 @@
     <h2>Login 3:</h2>
 
     <form method="post" action="ejephp.php">
-        <label for="ususario">Nombre:</label>
+        <label for="usuario">Nombre:</label>
         <input type="text" id="usuario" name="usuario"><br><br>
         
         <label for="contrasena">Contraseña:</label>
