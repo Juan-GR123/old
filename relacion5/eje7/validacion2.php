@@ -116,7 +116,7 @@ function test_input($data) {
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <h2>Formulario de Empleo</h2>
         <label for="name">Nombre:</label><br>
-        <input type="text" id="name" name="name" value="<?php echo $name; ?>">
+        <input type="text" id="name" name="name" value="<?php echo $name; ?>"><!--Es necesario poner en los valores el echo de las variables para que una vez mandemos el formulario sigan estando en los labels visibles-->
         <span style="color:red"><?php echo $nameErr; ?></span><br><br>
 
         <label for="surname">Apellidos:</label><br>
