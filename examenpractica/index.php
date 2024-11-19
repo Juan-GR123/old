@@ -13,9 +13,9 @@
         <?php
         include 'datos.php';
 
-        if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['usuario']) && isset($_GET['contraseña'])) {
+        if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['usuario']) && isset($_GET['contrasenia'])) {
             $usuario = $_GET['usuario'];
-            $contraseña = $_GET['contraseña'];
+            $contraseña = $_GET['contrasenia'];
             try {
                 if (login($usuario, $contraseña)) {
                     escribeUsuario($usuario);
@@ -31,14 +31,12 @@
 
 
         ?>
-            <form method="get" action="datos.php">
-                <label for="usuario">Nombre:</label>
-                <input type="text" id="usuario" name="usuario"><br><br>
-
-                <label for="contrasena">Contraseña:</label>
-                <input type="text" id="contrasena" name="contrasena"><br><br>
-
-                <input type="submit" value="Enviar">
+            <form method="get" action="index.php">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" required><br><br>
+                <label for="contrasenia">Contraseña:</label>
+                <input type="password" id="contrasenia" name="contrasenia" required><br><br>
+                <input type="submit" value="Iniciar sesión">
             </form>
         <?php
         }
