@@ -31,12 +31,14 @@
 
 
         ?>
+            <link rel="stylesheet" href="../relacion5/css/estilos.css">
             <form method="get" action="index.php">
                 <label for="usuario">Usuario:</label>
                 <input type="text" id="usuario" name="usuario" required><br><br>
                 <label for="contrasenia">Contraseña:</label>
                 <input type="password" id="contrasenia" name="contrasenia" required><br><br>
-                <input type="submit" value="Iniciar sesión">
+               <!-- <input type="submit" value="Iniciar sesión">-->
+                <button>Iniciar sesion</button>
             </form>
         <?php
         }

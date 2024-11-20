@@ -64,11 +64,10 @@
             ["isbn" => "123456789103", "usuario" => "Rex", "fechaInicio" => "2005-06-10", "fechaFin" => "2005-12-12"]
         ];
       
-            function login($usu, $pw)
-            {
+            function login($usu, $pw){
                 global $usuarios;
                 if (empty($pw)) {
-                    return "ERROR DEL SISTEMA: La contraseña no puede estar vacia";
+                    throw new Exception("ERROR DEL SISTEMA: La contraseña no puede estar vacia");
                 } else {
                     return isset($usuarios[$usu]) && $usuarios[$usu]["contrasenia"] === $pw;
                 }
@@ -76,11 +75,10 @@
          
         //  echo login("Pepe", "Queen123");
 
-        function escribeUsuario($usu)
-        {
+        function escribeUsuario($usu) {
             global $usuarios;
             if (empty($usu)) {
-                return "ERROR DEL SISTEMA: El usuario no existe";
+                throw new Exception("ERROR DEL SISTEMA: El usuario no existe");
             } else {
                 if (isset($usuarios[$usu])) {
                     $user = $usuarios[$usu];
@@ -94,8 +92,7 @@
 
 
 
-        function retrasado($ini, $fin)
-        {
+        function retrasado($ini, $fin){
             if ($ini > $fin) {
                 return "SI";
             } else {
@@ -108,8 +105,8 @@
             global $prestamos;
             global $libros;
             global $usuarios;
-            if (empty($usu)) {
-                return "ERROR DEL SISTEMA: El usuario no existe";
+            if (!isset($usuarios[$usu])) {
+                throw new Exception("ERROR DEL SISTEMA: El usuario no existe");
             } else {
                 /* foreach($prestamos as $key =>$values){
             $valor=$values["isbn"];
@@ -136,7 +133,7 @@
                         echo "<tr>";
                         echo "<td>ISBN: " . $values["isbn"] . "</td> <td>titulo: " . $libros[$valor]["titulo"] .
                             " </td><td>Fechaini: " .  $values["fechaInicio"] . " </td><td>FechaFin: " . $values["fechaFin"] .
-                            "</td><td> Retrasado: " . retrasado($values["fechaInicio"], $values["fechaFin"]) . "</td><br>";
+                            "</td><td> Retrasado: " . retrasado(time(), $values["fechaFin"]) . "</td><br>";
                         echo "</tr>";
                     }
                 }
