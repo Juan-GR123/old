@@ -58,7 +58,7 @@
             }
         }
         fclose($fich);
-        
+
         rename("../eje5/fichero.txt", "Nueva.txt");
         unlink("Nueva.txt");
     }catch (Exception $e) {
