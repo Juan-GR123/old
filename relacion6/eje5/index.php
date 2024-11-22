@@ -32,17 +32,33 @@
         }
         fclose($fich);
 
-        $fich=fopen("fichero.txt","w");
+        $fich=fopen("fichero.txt","a");
         if ($fich === False){
             echo "No se encuentra el fichero o no se pudo leer<br>";
         }else{
                 fwrite($fich,"algo algo algo\n");
         }
         fclose($fich);
+
+   
+
         //$contenido = file_get_contents("fichero.txt");
         //$res = file_put_contents("fichero_salida.txt", $contenido);
         //copy
         copy("fichero.txt","fichero_salida.txt");
+
+        $fich = fopen("fichero_salida.txt", "r");
+        if ($fich === False){
+            echo "No se encuentra el fichero o no se pudo leer<br>";
+        }else{
+            //2.cuando encuentra la ultima linea se detiene
+            while(!feof($fich)){
+                $linea =  fgets($fich);
+                echo "$linea <br>";
+            }
+        }
+        fclose($fich);
+        
         rename("../eje5/fichero.txt", "Nueva.txt");
         unlink("Nueva.txt");
     }catch (Exception $e) {
