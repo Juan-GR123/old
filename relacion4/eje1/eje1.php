@@ -16,6 +16,7 @@
             <input type="submit" value="Enviar">
         </form>
     <?php 
+    //1. Escribe un programa que nos diga el horóscopo a partir del día y el mes de nacimiento.
         function fecha($dia,$mes){
             return match(true){
                 ($mes == 1 && $dia >= 20) || ($mes == 2 && $dia <= 18) => "Acuario",

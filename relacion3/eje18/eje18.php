@@ -25,7 +25,7 @@
         foreach($empleados as $key => $empleado){
             echo $key ."=" .$empleado['nombre'] ."<br> Salario:  ". $empleado['salario'] ."<br>";
         }    
-    }
+    }//la key es el id
 //Aumenta el salario de todos los empleados en un 10%, excepto aquellos que ya ganan más de 50,000. Utiliza array_map() para realizar la operación.
 function porcentaje($empleados){
         if($empleados["salario"] < 50000){
@@ -52,7 +52,8 @@ echo "Segunda actividad: Ordenar ascendentemente sus ID <br>";
 
 echo "<br><br>";
 echo "Ordenar segun sus precios<br>";
-//Devuelve una lista de los tres empleados con los salarios más altos, usando arsort() para ordenar por salario de mayor a menor y luego array_slice() para obtener los primeros tres.
+//Devuelve una lista de los tres empleados con los salarios más altos, usando arsort() 
+//para ordenar por salario de mayor a menor y luego array_slice() para obtener los primeros tres.
     arsort($empleados);
     $final=array_slice($empleados,0,3,true);
     echo "<br>";

@@ -124,21 +124,27 @@
         }
     
         // Determinación del ganador de la baza
+        //El palo de salida es el palo de la primera carta jugada
         $paloSalida = $cartasJugadas[0]["carta"]["palo"];
+       // Se asume inicialmente que el ganador es quien jugó la primera carta
         $ganador = $cartasJugadas[0];
         foreach ($cartasJugadas as $jugada) {
-            if (
+            if (// Caso 1: La carta actual es del palo triunfo
                 $jugada["carta"]["palo"] === $cartaTriunfo["palo"] &&
+                // Y el ganador provisional no es del palo triunfo, o su valor es menor
                 ($ganador["carta"]["palo"] !== $cartaTriunfo["palo"] ||
                     $jugada["carta"]["valor"] > $ganador["carta"]["valor"])
             ) {
-                $ganador = $jugada;
+                $ganador = $jugada;// Actualizar el ganador
             } elseif (
+                 // Caso 2: La carta actual es del palo de salida
                 $jugada["carta"]["palo"] === $paloSalida &&
+                 // Y el ganador provisional no es del palo triunfo
                 $jugada["carta"]["valor"] > $ganador["carta"]["valor"] &&
+                 // Y su valor es mayor que el del ganador provisional
                 $ganador["carta"]["palo"] !== $cartaTriunfo["palo"]
             ) {
-                $ganador = $jugada;
+                $ganador = $jugada;// Actualizar el ganador
             }
         }
     

@@ -23,7 +23,8 @@
 </head>
 <body>
     <?php 
-   /* Utiliza arrays y funciones para escribir el código fuente, en lenguaje PHP, que presente en el navegador del cliente esta página:*/
+   /* Utiliza arrays y funciones para escribir el código fuente, 
+   en lenguaje PHP, que presente en el navegador del cliente esta página:*/
    $asignaturas=["Matematicas","lengua","fisica","latin","Ingles"]; 
    $tri1=[3,8,7,4,6];
     $tri2=[10,5,2,7,2];

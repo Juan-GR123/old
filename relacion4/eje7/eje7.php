@@ -15,6 +15,15 @@
 <body>
 
 <?php
+/*Rellena un array bidimensional de 6 filas por 9 columnas con número enteros positivos
+comprendidos entre 100 y 999 (ambos incluidos). Todos los números deben de ser
+distintos, es decir, no se puede repetir ninguno. Muestra a continuación por pantalla el
+contenido del array de tal forma que se cumplan los siguientes requisitos:
+a. Los números de las dos diagonales donde está el mínimo deben aparecer en
+color verde
+b. El mínimo debe aparecer en color azul
+c. El resto de los números deben de aparecer en color negro.
+*/
 // Dimensiones de la matriz
 $filas = 6;
 $columnas = 9;
