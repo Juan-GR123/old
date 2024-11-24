@@ -6,7 +6,7 @@
     <title>Tema 3</title>
 </head>
     <body>
-        <form method="POST" action=" ">
+        <form method="POST" action="">
             <label> INTRODUCE LA MATRÍCULA: </label>
             <input type="text" id="matricula" name="matricula">
             <input type="submit" value="enviar">

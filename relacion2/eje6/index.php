@@ -23,7 +23,7 @@
         $num1=150;
         $num2= 39;
         echo "El maximo comun divisor de $num1 y $num2 es " . mcd($num1,$num2);
-
+        //minimo comun multiplo(a,b):(a*b)/Maximo Comun Divisor(a,b);
     ?>
 </body>
 </html>

@@ -53,7 +53,7 @@
         //http://localhost/old/relacion2/eje2/index.php?num1=10&num2=5&operacion=/
         if (isset($_GET['num1']) && isset($_GET['num2']) && isset($_GET['operacion'])) {
             // Convertimos los parámetros a números
-            $num1 = intval($_GET['num1']);
+            $num1 = intval($_GET['num1']);//obtiene el valor entero de una variable
             $num2 = intval($_GET['num2']);
             $operacion = urlencode($_GET['operacion']);//Esta función es conveniente cuando se codifica una cadena a ser usada como la parte de consulta de una URL, como método práctico para pasar variables a la siguiente página.
             if($operacion!="+"){
