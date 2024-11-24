@@ -19,10 +19,14 @@
 comprendidos entre 100 y 999 (ambos incluidos). Todos los números deben de ser
 distintos, es decir, no se puede repetir ninguno. Muestra a continuación por pantalla el
 contenido del array de tal forma que se cumplan los siguientes requisitos:
+
 a. Los números de las dos diagonales donde está el mínimo deben aparecer en
 color verde
+
 b. El mínimo debe aparecer en color azul
+
 c. El resto de los números deben de aparecer en color negro.
+
 */
 // Dimensiones de la matriz
 $filas = 6;
@@ -49,7 +53,19 @@ for ($i = 0; $i < $filas; $i++) {
 }
 
 // Encontrar el mínimo
-$minimo = min($numeros);
+//$minimo = min($numeros);
+
+// Encontrar el número mínimo y su posición
+$minimo = 999;
+$posMinimo = [0, 0];
+for ($i = 0; $i < $filas; $i++) {
+    for ($j = 0; $j < $columnas; $j++) {
+        if ($matriz[$i][$j] < $minimo) {
+            $minimo = $matriz[$i][$j];
+            $posMinimo = [$i, $j];
+        }
+    }
+}
 
 // Mostrar la matriz con estilos
 echo "<table border='1'>";
@@ -61,7 +77,11 @@ for ($i = 0; $i < $filas; $i++) {
         // Verificar la condición para aplicar el color
         if ($numero == $minimo) {
             $clase = "numero-azul"; // Mínimo en azul
-        } elseif ($i == $j || $i + $j == $columnas - 1) {
+        } elseif (abs($i - $posMinimo[0]) == abs($j - $posMinimo[1])) {//si los dos son iguales por estar en la posicion en la que deben estar
+            /*eje: $posMinimo[0]==0 y $posMinimo[1]==3 y $i==1 y $j==2
+            abs(1-0)==abs(3-2);
+            */
+            //abs convierte un número a absoluto
             $clase = "numero-verde"; // Diagonales en verde
         } else {
             $clase = "numero-negro"; // Resto en negro
