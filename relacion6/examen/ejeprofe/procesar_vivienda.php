@@ -7,6 +7,10 @@
 </head>
 <body>
 <?php
+//preguntar al profe como lo ha hecho y que lo explique
+
+
+
 // Función para generar el identificador de la vivienda
 function generar_identificador_vivienda()
 {
@@ -17,12 +21,12 @@ function generar_identificador_vivienda()
     $contador = 1;
 
     if (file_exists($archivoSecuencia)) {
-        $ultimoRegistro = file_get_contents($archivoSecuencia);
-        $ultimaFecha = substr($ultimoRegistro, 0, 8);
-        $ultimoContador = (int)substr($ultimoRegistro, 8);
+        $ultimoRegistro = file_get_contents($archivoSecuencia);//coges todo el contenido
+        $ultimaFecha = substr($ultimoRegistro, 0, 8);//8 primeros caracteres
+        $ultimoContador = (int)substr($ultimoRegistro, 8);//cogemos los caracteres que quedan a partir del 8, es decir el 9,10 y 12
 
         // Si es el mismo día, incrementar el contador; si no, reiniciar
-        if ($ultimaFecha === $fechaActual) {
+        if ($ultimaFecha === $fechaActual) {//si la fecha actual es igual que la de el fichero
             $contador = $ultimoContador + 1;
         }
     }
@@ -32,10 +36,12 @@ function generar_identificador_vivienda()
     //         -> 3: es la longitud total de los caracteres que se van a añadir
     //         -> '0' es el numero con el completaremos hasta 3 caracteres en caso que sea necesario
     //         -> STR_PAD_LEFT especifica que el numero de caracteres se añadirá a la izquierda del string que ya haya.   
-    $identificador = $fechaActual . str_pad($contador, 3, '0', STR_PAD_LEFT); 
+    $identificador = $fechaActual . str_pad($contador, 3, '0', STR_PAD_LEFT);//si  le pide 3 digitos
+    //si no tiene digitos suficientes te da un 0.
+    // STR_PAD_LEFT: Te añade los nuemeros de la izquierda a la derecha
 
     // Guardar el nuevo valor en el archivo
-    file_put_contents($archivoSecuencia, $identificador);
+    file_put_contents($archivoSecuencia, $identificador);//pisa lo que haya en el fichero txt
 
     return $identificador;
 }
@@ -56,26 +62,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Validar y procesar fotos
     $rutaFotos = [];
-    if (isset($_FILES['foto']) && is_array($_FILES['foto']['name'])) {
-        $carpetaFotos = 'fotos/';
+    if (isset($_FILES['foto']) && is_array($_FILES['foto']['name'])) {//se refiere al foto formulario
+        $carpetaFotos = 'fotos/';//si no existe se crea
         if (!file_exists($carpetaFotos)) {
             mkdir($carpetaFotos);
         }
 
         // Iterar a través de un máximo de 5 fotos
-        for ($i = 0; $i < min(5, count($_FILES['foto']['name'])); $i++) {
-            if ($_FILES['foto']['size'][$i] > 100 * 1024) {
-                echo "La foto " . ($i + 1) . " excede el límite de 100 KB y no se ha subido.<br>";
+        for ($i = 0; $i < min(5, count($_FILES['foto']['name'])); $i++) {//no puedes mandar mas de 5 fotos
+            if ($_FILES['foto']['size'][$i] > 100000 * 1024) {
+                echo "La foto " . ($i + 1) . " excede el límite de 1000 KB y no se ha subido.<br>";
                 continue;
             }
 
             // Crear el nombre de la foto con el identificador de la vivienda y un sufijo iterativo
             $extension = pathinfo($_FILES['foto']['name'][$i], PATHINFO_EXTENSION);
-            $nombreFoto = $idVivienda . str_pad($i + 1, 2, '0', STR_PAD_LEFT) . '.' . $extension;
-            $rutaFoto = $carpetaFotos . $nombreFoto;
+            $nombreFoto = $idVivienda . str_pad($i + 1, 2, '0', STR_PAD_LEFT) . '.' . $extension; //le añades al identificador de vivienda 
+            //(fecha de hoy y vivendas que se han añadido hoy)
+            // el numero de fotos de cada vivienda que como maximo puede ser 5
+
+            $rutaFoto = $carpetaFotos . $nombreFoto;//guardas el nombre de cada foto
 
             if (move_uploaded_file($_FILES['foto']['tmp_name'][$i], $rutaFoto)) {
-                $rutaFotos[] = $rutaFoto;
+                $rutaFotos[] = $rutaFoto; 
             } else {
                 echo "Error al subir la foto " . ($i + 1) . ".<br>";
             }
@@ -98,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ];
         return $precio * $porcentajes[$zona];
     }
+
     $beneficio = calcular_beneficio($zona, $tamano, $precio);
 
     // Mostrar información

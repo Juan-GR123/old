@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta de Vivienda</title>
+    <link rel="stylesheet" href="../../css/estilos.css">
 </head>
 <body>
     <h1>Formulario de Vivienda</h1>
@@ -45,13 +46,16 @@
         <br>
 
         <label>Extras:</label>
-        <input type="checkbox" name="extras[]" value="Piscina"> Piscina
-        <input type="checkbox" name="extras[]" value="Jardín"> Jardín
-        <input type="checkbox" name="extras[]" value="Garaje"> Garaje
+        <label>Piscina
+        <input type="checkbox" name="extras[]" value="Piscina"></label>
+        <label>Jardín  
+        <input type="checkbox" name="extras[]" value="Jardín"></label>
+        <label>Garaje 
+        <input type="checkbox" name="extras[]" value="Garaje"></label>
         <br>
 
-        <label for="foto">Foto (máx 100MB):</label>
-        <input type="file" name="foto" id="foto" accept="image/*">
+        <label for="foto">Foto (máx 100MB):
+        <input type="file" name="foto" id="foto" accept="image/*" multiple ></label>
         <br>
 
         <label for="observaciones">Observaciones:</label>

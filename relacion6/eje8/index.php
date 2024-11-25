@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<?php
+$directorio = 'images';
+
+// Crear el directorio si no existe
+if (!is_dir($directorio)) {
+    mkdir($directorio, 0755, true);
+}
+
+// Manejo de la subida de imágenes
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['imagen'])) {
+    $nombreArchivo = basename($_FILES['imagen']['name']);
+    $rutaDestino = $directorio . '/' . $nombreArchivo;
+
+    // Comprobar si el archivo es una imagen
+    $tipoArchivo = pathinfo($rutaDestino, PATHINFO_EXTENSION); // Cogemos la extensión del archivo con pathinfo
+    $tiposPermitidos = ['jpg', 'jpeg', 'png', 'gif'];
+
+    if (in_array(strtolower($tipoArchivo), $tiposPermitidos)) {
+        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) { //movemos la imagen del directorio temporal al destino
+            echo "La imagen se ha subido correctamente.<br>";
+        } else {
+            echo "Error al subir la imagen.<br>";
+        }
+    } else {
+        echo "Solo se permiten archivos de imagen (jpg, jpeg, png, gif).<br>";
+    }
+}
+
+// Mostrar las imágenes en el directorio
+if ($handle = opendir($directorio)) {
+    echo "<br> Imágenes en el directorio '$directorio':<br>";
+    while (false !== ($entry = readdir($handle))) { // Vamos a ir leyendo todos los ficheros y subdirectorios
+        if ($entry != "." && $entry != "..") { // Menos el directorio actual y el directorio anterior
+            echo "<img src='$directorio/$entry' alt='$entry' style='width:100px; height:auto; margin:5px;'><br>";
+        }
+    }
+    closedir($handle);
+}
+?>
+<form action="" method="post" enctype="multipart/form-data">
+    Selecciona una imagen para subir:
+    <input type="file" name="imagen" accept="image/*" required>
+    <input type="submit" value="Subir imagen">
+</form>
+</body>
+
+</html>
