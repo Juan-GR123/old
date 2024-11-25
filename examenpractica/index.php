@@ -10,6 +10,7 @@
 <body>
 
     <body>
+            <!--Hacer un try y catch-->
         <?php
         include 'datos.php';
 
@@ -44,7 +45,7 @@
         }
         ?>
 
-        <!--Hacer un try y catch-->
+    
     </body>
 
 </html>

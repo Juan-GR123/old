@@ -29,7 +29,7 @@
         if ($usuario === "usuario" && $contrasena === 1234) {
             header("location:http://localhost/old/relacion5/eje1/index.php");
         } else {
-            header("location:http://localhost/old/relacion5/eje3/error.php");
+            header("location:http://localhost/old/relacion5/eje2/error.php");
         }
     }
     ?>

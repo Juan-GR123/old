@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta Alumno</title>
+    <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
+    
+    <form method="post" action="ejephp.php">
     <h1>Ejercicio inicial</h1>
     <p>Crea un formulario con el siguientes aspecto:</p>
     <h2>Alta alumno:</h2>
-
-    <form method="post" action="ejephp.php">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre"><br><br>
 

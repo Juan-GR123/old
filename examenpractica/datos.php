@@ -69,7 +69,7 @@
                 if (empty($pw)) {
                     throw new Exception("ERROR DEL SISTEMA: La contraseña no puede estar vacia");
                 } else {
-                    return isset($usuarios[$usu]) && $usuarios[$usu]["contrasenia"] === $pw;
+                    return isset($usuarios[$usu]) && $usuarios[$usu]["contrasenia"] === $pw;//te devuelve true o false
                 }
             }
          
