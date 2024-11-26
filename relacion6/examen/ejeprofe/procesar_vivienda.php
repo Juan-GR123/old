@@ -62,10 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Validar y procesar fotos
     $rutaFotos = [];
-    if (isset($_FILES['foto']) && is_array($_FILES['foto']['name'])) {//se refiere al foto formulario
-        $carpetaFotos = 'fotos/';//si no existe se crea
+    if (isset($_FILES['foto']) && count($_FILES['foto']['name'])>0) {//se refiere al foto formulario
+        $carpetaFotos = 'fotos/';//se guarda el contenido de la carpeta fotos como array
         if (!file_exists($carpetaFotos)) {
-            mkdir($carpetaFotos);
+            mkdir($carpetaFotos);//si no existe se crea
         }
 
         // Iterar a través de un máximo de 5 fotos
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <br>
 <h3>
-    <a href="inmobiliaria.php">Volver al formulario de alta</a>
+    <a href="profe.php">Volver al formulario de alta</a>
 </h3>
 </body>
 </html>

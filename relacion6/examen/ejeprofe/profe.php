@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="../../css/estilos.css">
 </head>
 <body>
-    <h1>Formulario de Vivienda</h1>
+   
     <form action="procesar_vivienda.php" method="POST" enctype="multipart/form-data">
+    <h1>Formulario de Vivienda</h1>
         <label for="tipo">Tipo de vivienda:</label>
         <select name="tipo" id="tipo">
             <option value="Piso">Piso</option>
@@ -55,7 +56,7 @@
         <br>
 
         <label for="foto">Foto (máx 100MB):
-        <input type="file" name="foto" id="foto" accept="image/*" multiple ></label>
+        <input type="file" name="foto[]" id="foto" accept="image/*" multiple ></label>
         <br>
 
         <label for="observaciones">Observaciones:</label>
