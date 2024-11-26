@@ -35,12 +35,12 @@ e.      A partir de esta clase crea los objetos que necesites y el script que no
         ) {}
         public function acelerar()
         {
-            $this->velocidad += 1;
+            $this->velocidad ++;
         }
 
         public function frenar()
         {
-            $this->velocidad -= 1;
+            $this->velocidad --;
         }
 
         // Métodos getter
@@ -167,6 +167,12 @@ e.      A partir de esta clase crea los objetos que necesites y el script que no
 
             return $this;
         }
+
+        public function __toString()
+        {
+            return  "<br>Marca: " . $this->marca . "<br>Modelo: " . $this->modelo . "<br>Color: " . $this->color;
+        }
+
     }
 
     ?>
