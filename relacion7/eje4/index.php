@@ -9,7 +9,8 @@
 
 <body>
     <?php
-
+//El throw no funciona si lo pones en perro.php debido a que el include no se aplica hasta que
+//se comprueba si el fichero existe
 
     try {
 
