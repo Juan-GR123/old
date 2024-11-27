@@ -13,7 +13,10 @@
     function metodo(&$alumnos)
     {
         echo "Alumnos" . " " . "Nota<br>";
-        asort($alumnos);
+        asort($alumnos);//ordena los valores
+        //sort ordena el array original indexado
+        //ksort ordena las claves
+        //usort ordena por criterio
         foreach ($alumnos as $key => $values) {
             echo $key . " " . $values . "<br>";
         }

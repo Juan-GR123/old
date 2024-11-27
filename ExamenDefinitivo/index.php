@@ -30,7 +30,7 @@
 
     ?>
         <link rel="stylesheet" href="../relacion5/css/estilos.css">
-        <form method="get" action="index.php">
+        <form method="post" action="index.php">
             <label for="usuario">Usuario:</label>
             <input type="text" id="usuario" name="usuario" required><br><br>
             <label for="contrasenia">Contraseña:</label>
