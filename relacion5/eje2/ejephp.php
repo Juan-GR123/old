@@ -28,8 +28,10 @@
 
         if ($usuario === "usuario" && $contrasena === 1234) {
             header("location:http://localhost/old/relacion5/eje1/index.php");
+            exit();	// Es recomendable usar exit después de redirigir
         } else {
             header("location:http://localhost/old/relacion5/eje2/error.php");
+            exit();	// Es recomendable usar exit después de redirigir
         }
     }
     ?>

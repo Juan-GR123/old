@@ -9,6 +9,8 @@
     <h1>Datos de coche</h1>
     <?php
     require_once 'coche.php';
+
+    
     $coche=new Coche();
     echo $coche;
 

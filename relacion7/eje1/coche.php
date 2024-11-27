@@ -24,7 +24,7 @@ e.      A partir de esta clase crea los objetos que necesites y el script que no
         permita mostrar lo siguiente:*/
 
     class Coche
-    {
+    {//promoción de propiedades
         public function __construct(
             private string $color = "Rojo",
             private string $marca = "Ferrari",
@@ -170,7 +170,8 @@ e.      A partir de esta clase crea los objetos que necesites y el script que no
 
         public function __toString()
         {
-            return  "<br>Marca: " . $this->marca . "<br>Modelo: " . $this->modelo . "<br>Color: " . $this->color;
+            return  "<br>Marca: " . $this->marca . "<br>Modelo: " . $this->modelo . "<br>Color: " . $this->color
+            . "<br>Caballos: " . $this->caballos . "<br>Velocidad: " . $this->velocidad . "<br>Plazas: " . $this->n_plazas;
         }
 
     }
