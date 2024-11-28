@@ -131,7 +131,7 @@
                     $valor = $values["isbn"];
                     if ($values["usuario"] === $usu) {
                         echo "<tr>";
-                        echo "<td>ISBN: " . $values["isbn"] . "</td> <td>titulo: " . $libros[$valor]["titulo"] .
+                        echo "<td>ISBN: " . $values["isbn"] . "</td> <td>titulo: " . $libros[$valor]["titulo"] .//$valor=$values["isbn"] para que coincida con la clave de libros
                             " </td><td>Fechaini: " .  $values["fechaInicio"] . " </td><td>FechaFin: " . $values["fechaFin"] .
                             "</td><td> Retrasado: " . retrasado(time(), $values["fechaFin"]) . "</td><br>";
                         echo "</tr>";

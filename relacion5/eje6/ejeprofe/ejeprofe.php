@@ -78,6 +78,8 @@
             <h2>Datos de Amigos</h2>
             <label for="name">Nombre:</label><br>
             <input type="text" id="name" name="name" value="<?php echo $name; ?>">
+            <!--El echo name es para  que siga mostrando los datos aun despues de haber enviado 
+            el formulario-->
             <span style="color:red"><?php echo $nameErr; ?></span><br><br>
 
             <label for="phone">Teléfono:</label><br>

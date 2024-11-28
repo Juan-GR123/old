@@ -23,7 +23,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $usuario = $_POST['usuario'] ?? '';
-        $contrasena = (int)$_POST['contrasena'] ?? '';
+        $contrasena = (int)$_POST['contrasena'] ?? 0;
 
 
         if ($usuario === "usuario" && $contrasena === 1234) {

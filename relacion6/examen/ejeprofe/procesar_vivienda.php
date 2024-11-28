@@ -46,7 +46,7 @@ function generar_identificador_vivienda()
     return $identificador;
 }
 
-// Validar y procesar datos
+// 1- Validar y procesar datos
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Generar el identificador de vivienda
     $idVivienda = generar_identificador_vivienda();

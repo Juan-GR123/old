@@ -9,3 +9,4 @@ vivienda_672f38a6affe8, Piso, Centro, FGL,31, 2, 250000, 100, Piscina, Jardín, 
 20241122002, Piso, Zaidín, FGL,31, 3, 150000, 80, Piscina, Jardín, Nordico 1, , 37500
 20241122003, Piso, Centro, FGL,31, 4, 190000, 90, Piscina, Jardín, dormitorio, , 5700020241125001, Piso, Centro, doreo@csvs.com, 5, 1000, 1000, Jardín, , , 350
 20241125002, Piso, Centro, doreo@csvs.com, 5, 1000, 1000, Jardín, , , 350
+20241128001, Piso, Centro, doreo@csvs.com, 2, 1000, 1000, Piscina, Jardín, , fotos/2024112800101.png, 350
