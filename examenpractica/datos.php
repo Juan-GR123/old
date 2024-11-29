@@ -116,7 +116,6 @@
                 }
            }*/
                 echo "<table>";
-
                 echo "<thead>";
                 echo "<tr>";
                 echo "<th>isbn</th>";
