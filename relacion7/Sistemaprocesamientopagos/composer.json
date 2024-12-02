@@ -1,5 +1,4 @@
 {
-    "name": "El programa de Jose",
     "description": "Programa de procesamiento de pedidos",
     "autoload": {
         "psr-4": {
