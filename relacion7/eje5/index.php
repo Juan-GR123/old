@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php 
-        include "productos.php";
+        include "producto.php";
         try{
             $producto = new Productos("Laptop", 1000, 10);
             echo "Precio original con IVA: " . Productos::calcularPrecioConIva($producto->precio) . "<br>";

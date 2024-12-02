@@ -14,8 +14,8 @@
         public $nombre;
         public $precio;
         public $stock;
-        public static $IVA;
-        public static $DESCUENTO_MAXIMO;
+        public const IVA=0.20;
+        public const DESCUENTO_MAXIMO=30;
 
         public function __construct($nombre, $precio, $stock)
         {
@@ -99,15 +99,15 @@
         }
 
         public static function calcularPrecioConIva(float $precio) {
-            $precioIVA=$precio* (1+self::$IVA);
+            $precioIVA=$precio* (1+self::IVA);
             return $precioIVA;
         }
 
-        public function aplicarDescuento($porcentaje){
-            if($porcentaje<30){
+        public function aplicarDescuento(int $porcentaje){
+            if($porcentaje<self::DESCUENTO_MAXIMO){
                 return $this->getPrecio()*($porcentaje/100);
             }else{
-                throw new InvalidArgumentException("El descuento no puede exceder el máximo permitido.");;
+                throw new InvalidArgumentException("El descuento no puede exceder el máximo permitido.");
             }
         }
     }
