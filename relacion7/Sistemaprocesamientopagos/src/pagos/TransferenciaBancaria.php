@@ -1,5 +1,5 @@
 <?php 
-namespace App\Pagos;
+namespace App\Pagos;//App es un apodo que se le da a la carpeta src. Esto se indica en composer
 
 use App\Interfaces\PagoInterface;
 
