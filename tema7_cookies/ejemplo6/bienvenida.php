@@ -2,7 +2,7 @@
 session_name('idSesion');
 session_start();
 
-if (!isset($_SESSION['usuario']) && isset($_COOKIE['bienvenida'])) {
+if (isset($_SESSION['usuario']) && isset($_COOKIE['bienvenida'])) {
     $mensaje = "¡Hola de nuevo, " . htmlspecialchars($_COOKIE['bienvenida']) . "!";
 } elseif (isset($_SESSION['usuario'])) {
     $mensaje = "Bienvenido, " . htmlspecialchars($_SESSION['usuario']) . "!";

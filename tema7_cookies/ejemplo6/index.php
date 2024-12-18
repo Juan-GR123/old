@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['usuario'] = $usuario;
         setcookie('bienvenida', $usuario, time() + 7 * 86400, '/');
         header("Location: bienvenida.php");
-        exit;
+        exit;//en caso de que no haga el header que interrumpa el flujo del programa
     } else {
         $error = "Usuario o contraseña incorrectos.";
     }
@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <?php if (!empty($error)): ?>
+    <?php if (!empty($error)){ ?>
         <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
-    <?php endif; ?>
+    <?php } ?>
     <form method="POST">
         <h1>Iniciar Sesión</h1>
         <label for="usuario">Usuario:</label>
