@@ -14,7 +14,7 @@ setcookie('bienvenida', 'admin', time() + 86400, '/'); // Indica que la cookie s
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'logout') {
     session_unset();
     session_destroy();
-    setcookie('bienvenida', '', time() - 3600, '/');
+    setcookie('bienvenida', '', time() - 3600, '/');//el espacio en blanco se utiliza para asignar un valor
     header("Location: sesionesCookiesFallosCorregidos.php");
     exit;
 }

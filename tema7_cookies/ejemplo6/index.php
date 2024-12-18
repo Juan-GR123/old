@@ -1,47 +1,51 @@
 <?php
-    session_start();
+session_name('idSesion');
+session_start();
 
-    $nombre = "sara";
-    $con = "123";
+// Tiempo de inactividad (5 minutos)
+if (isset($_SESSION['ultimo_acceso']) && (time() - $_SESSION['ultimo_acceso'] > 5 * 60)) {
+    session_unset();
+    session_destroy();
+}
+$_SESSION['ultimo_acceso'] = time();
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $usuario = $_POST['usuario'] ?? '';
-        $passwd = $_POST['password'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usuario = $_POST['usuario'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-        if($usuario === $nombre && $passwd === $con){
-            $_SESSION['usuario'] = $usuario;
-
-            setcookie('bienvenida', $usuario, time() + 7*24*60*60);
-
-            header("Location: bienvenida.php");
-            exit;
-        }else{
-            echo "USUARIO O CONTRASEÑA INCORRECTOS.";
-        }
+    if ($usuario === 'admin' && $password === '1234') {
+        $_SESSION['usuario'] = $usuario;
+        setcookie('bienvenida', $usuario, time() + 7 * 86400, '/');
+        header("Location: bienvenida.php");
+        exit;
+    } else {
+        $error = "Usuario o contraseña incorrectos.";
     }
+}
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 5</title>
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="../../../Tema5/css/estilos.css">
 </head>
+
 <body>
-    <?php if (isset($_SESSION['usuario'])){ ?>
-        <!-- <h1>Bienvenida, <?php echo htmlspecialchars($_SESSION['usuario']); ?>!</h1> -->
-        <!-- <p><a href="logout.php">Cerrar sesión</a></p> -->
-    <?php }else{ ?>
-        <form method="POST">
-            <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" name="usuario" required>
-            <br>
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <button type="submit">Iniciar sesión</button>
-        </form>
-    <?php } ?>
+    <?php if (!empty($error)): ?>
+        <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+    <?php endif; ?>
+    <form method="POST">
+        <h1>Iniciar Sesión</h1>
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" required>
+        <br>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Iniciar sesión</button>
+    </form>
 </body>
+
 </html>
