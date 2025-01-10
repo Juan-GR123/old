@@ -27,7 +27,8 @@ if (isset($_POST['producto'])) {
     $sql = "SELECT  tiendas.nombre AS tienda , tiendas.tlf , stock.unidades
             FROM tiendas
             INNER JOIN stock ON tiendas.cod = stock.tienda 
-            WHERE stock.producto= :producto";//:producto === $producto con bindParam
+            WHERE stock.CodProducto= :producto";//:producto === $producto con bindParam
+
     $stmt = $pdo->prepare($sql); //Preparamos la consulta para que se realice en modo seguro
     $stmt->bindParam(':producto', $producto);
     $stmt->execute();
