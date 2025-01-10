@@ -7,46 +7,76 @@ $_SESSION['ultimoIntento'] = $_SESSION['ultimoIntento'] ?? time(); // Guarda el 
 
 
 //Establecemos la conexión con config.php y conexion.php
-require_once "./config/config.php";
-require_once "./Lib/conexion.php";
+require_once 'config/config.php';
+require_once 'lib/conexion.php';
 
-//Formulario de registro
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login']) && $_SESSION['errorInicioSesion'] < 3) {
+$conexion = new Conexion();
+$pdo = $conexion->getPdo();
+
+// Formulario de Registro
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register']) && $_SESSION['errorInicioSesion'] < 3) {
     // Compruebo que el email es válido
-    $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
+    $email = filter_var(trim($_POST['email_register']), FILTER_VALIDATE_EMAIL);
     // Quito los espacios en blanco al comienzo y final de la contraseña
-    $contrasena = trim($_POST['contrasena']);
+    $password = trim($_POST['password_register']);
 
-    if ($email && $contrasena) {
-        $sql = "SELECT id FROM usuarios WHERE email = :email";
-
-        $stmt = $pdo->prepare($sql); //Preparamos la consulta para que se realice en modo seguro
+    if ($email && $password) {
+        $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
-         // Si no existe el email en la base de datos, se registra
+        // Si no existe el email en la base de datos, se registra
         if ($stmt->rowCount() == 0) {
-            $contrasena_codigo = password_hash($password, PASSWORD_BCRYPT);
-
-            $sql2 = "INSERT INTO usuarios (email, password_hash) VALUES (:email, :contrasena)";
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            // INSERT INTO tabla (columna1, columna2, ...) VALUES (valor1, valor2, ...);
+            $stmt = $pdo->prepare("INSERT INTO usuarios (email, password_hash) VALUES (:email, :password_hash)");
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':contrasena_codigo', $password_hash);
+            $stmt->bindParam(':password_hash', $password_hash);
             $stmt->execute();
-
             echo "Registro exitoso!";
         } else {
-            echo "El registro ya esta registrado";
+            echo "El email ya está registrado.";
         }
     } else {
-        echo "Por favor, completa todos los datos del registro";
+        echo "Por favor completa todos los campos de registro.";
     }
-
+}
 
     //iniciar sesion
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login']) && $_SESSION['errorInicioSesion'] < 3) {
-        
+        // Compruebo que el email es válido
+        $email = filter_var(trim($_POST['email_login']), FILTER_VALIDATE_EMAIL);
+        // Quito los espacios en blanco al comienzo y final de la contraseña
+        $password = trim($_POST['password_login']);
+
+        if ($email && $password) {
+            $sql = "SELECT id FROM usuarios WHERE email = :email";
+
+            $stmt = $pdo->prepare($sql); //Preparamos la consulta para que se realice en modo seguro
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            if ($stmt->rowCount() == 1) {//rowCount te dice si la consulta devuelve algo
+                $user = $stmt->fetch();
+                $verify=password_verify($$password,$user['password_hash']);
+                if($verify){
+                    $_SESSION['errorInicioSesion'] = 0;
+                    $_SESSION['rol'] = $user['rol'];
+                    $_SESSION['nombre'] = $user['email'];
+                    header('Location: index.php');
+                    exit();
+                }
+            }else{
+                $_SESSION['errorInicioSesion']++;
+                $_SESSION['ultimoIntento'] = time(); // Registro la hora del último intento fallido
+            }
+        } else {
+            echo "Email no registrado.";
+        }
+    }else{
+        echo "Por favor, vuelve a introducir las credenciales";
     }
-}
+
 
 
 
@@ -64,30 +94,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login']) && $_SESSION[
 </head>
 
 <body>
-    <h1>Registro</h1>
-    <form method="POST">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email"><br><br>
+<h2>Registro</h2>
+<form method="POST">
+    <label for="email">Email:</label>
+    <input type="email" name="email_register">
+    <label for="password_register"> Contraseña: </label>
+    <input type="password" name="password_register">
+    <input type="submit" name="register" value="Registrar">
+</form>
 
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena"><br><br>
-        <input type="submit" name="register" value="Registrar">
-    </form>
 
+  <?php if ($_SESSION['errorInicioSesion'] < 3) { ?>
+        <h1>Iniciar Sesion</h1>
+        <form method="POST">
+            <label for="email_login">Email:</label>
+            <input type="text" id="email_login" name="email_login"><br><br>
 
-    <?php if ($_SESSION['errorInicioSesion'] < 3) {?>
-    <h1>Iniciar Sesion</h1>
-    <form method="POST">
-        <label for="email2">Email:</label>
-        <input type="text" id="email2" name="email2"><br><br>
-
-        <label for="contrasena2">Contraseña:</label>
-        <input type="password" id="contrasena2" name="contrasena2"><br><br>
-        <input type="submit" name="login" value="Iniciar Sesion">
-    </form>
-    <?php 
-    }else{
-        echo "<h2>Has superado los intentos permitidos</h2>";
+            <label for="password_login">Contraseña:</label>
+            <input type="password" id="password_login" name="password_login"><br><br>
+            <input type="submit" name="login" value="Iniciar Sesion">
+        </form>
+    <?php
+    } else {
+     echo "<h2>Has superado los intentos permitidos</h2>";
     }
     ?>
 </body>
