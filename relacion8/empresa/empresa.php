@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register']) && $_SESSI
 
 
   <?php if ($_SESSION['errorInicioSesion'] < 3) { ?>
-        <h1>Iniciar Sesion</h1>
+        <h1>Iniciar Sesion: 1</h1>
         <form method="POST">
             <label for="email_login">Email:</label>
             <input type="text" id="email_login" name="email_login"><br><br>
@@ -113,6 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register']) && $_SESSI
             <label for="password_login">Contraseña:</label>
             <input type="password" id="password_login" name="password_login"><br><br>
             <input type="submit" name="login" value="Iniciar Sesion">
+            
         </form>
     <?php
     } else {
