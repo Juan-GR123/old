@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register']) && $_SESSI
 </head>
 
 <body>
-<h2>Registro</h2>
+<h2>Registrosss</h2>
 <form method="POST">
     <label for="email">Email:</label>
     <input type="email" name="email_register">
