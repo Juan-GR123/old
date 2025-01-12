@@ -118,6 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register']) && $_SESSI
     } else {
      echo "<h2>Has superado los intentos permitidos</h2>";
     }
+    
     ?>
 </body>
 
