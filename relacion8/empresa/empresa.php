@@ -8,14 +8,6 @@ $_SESSION['ultimoIntento'] = $_SESSION['ultimoIntento'] ?? time(); // Guarda el 
 
 //Establecemos la conexión con config.php y conexion.php
 
-
-
-
-
-
-
-
-
 require_once 'config/config.php';
 require_once 'lib/conexion.php';
 
