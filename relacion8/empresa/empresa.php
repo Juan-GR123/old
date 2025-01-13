@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register']) && $_SESSI
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login']) && $_SESSION['errorInicioSesion'] < 3) {
     // Compruebo que el email es válido
     $email = filter_var(trim($_POST['email_login']), FILTER_VALIDATE_EMAIL);
+
     // Quito los espacios en blanco al comienzo y final de la contraseña
     $password = trim($_POST['password_login']);
 
@@ -77,9 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login']) && $_SESSION[
 } else {
     echo "Por favor, vuelve a introducir las credenciales";
 }
-
-
-
 
 
 ?>
