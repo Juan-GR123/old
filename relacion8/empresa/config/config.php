@@ -1,5 +1,5 @@
 <?php 
-// usuario root y contraseña 1234
+// usuario root
 
 define('SERVIDOR', 'localhost');
 define('USUARIO', 'root'); 
