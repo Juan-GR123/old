@@ -12,12 +12,13 @@
 </head>
 <body>
     <a href="logout.php">Cerrar Sesion</a>
-    <a href="modificarUsuario.php">Modificar Usuario</a>
+    <a href="modificarUsuarios.php">Modificar Usuario</a>
     <?php if($_SESSION['rol'] == 'admin') { 
     ?>
     <a href="">Zona Admin</a>
+    <a href="eliminarUsuario.php">Eliminar usuario</a>
     <?php } ?>
     <br>
-    Hola <?php echo $_SESSION['Nombre'];?>
+    Hola <?php echo $_SESSION['nombre'];?>
 </body>
 </html>
