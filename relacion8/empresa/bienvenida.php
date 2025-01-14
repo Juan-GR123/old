@@ -11,6 +11,13 @@
     <title>Document</title>
 </head>
 <body>
-    Hola <?php echo $_SESSION['email'];?>
+    <a href="logout.php">Cerrar Sesion</a>
+    <a href="modificarUsuario.php">Modificar Usuario</a>
+    <?php if($_SESSION['rol'] == 'admin') { 
+    ?>
+    <a href="">Zona Admin</a>
+    <?php } ?>
+    <br>
+    Hola <?php echo $_SESSION['Nombre'];?>
 </body>
 </html>

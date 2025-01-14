@@ -5,7 +5,7 @@ session_start();
 
 //7. Definimos una variable de sesión para controlar los 3 intentos fallidos de inicio de sesion
 $_SESSION['errorInicioSesion'] = $_SESSION['errorInicioSesion'] ?? 0;
-$_SESSION['ultimoIntento'] = $_SESSION['ultimoIntento'] ?? 0;
+$_SESSION['ultimoIntento'] = $_SESSION['ultimoIntento'] ?? time();
 
 
 //Establecemos la conexión con config.php y conexion.php
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 //iniciar sesion
 
 //6. Formulario de inicio de sesión
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login']) && $_SESSION['errorInicioSesion'] < 3) {
     // Compruebo que el email es válido
     $email = filter_var(trim($_POST['email_login']), FILTER_VALIDATE_EMAIL);
     // Quito los espacios en blanco al comienzo y final de la contraseña
@@ -67,7 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             //los indices son los atributos de la tabla
             if (password_verify($password, $user['password_hash'])) {
                 $_SESSION['email'] = $email;
+                $_SESSION['nombre'] = $user['Nombre'];
                 $_SESSION['errorInicioSesion'] = 0;
+                $_SESSION['rol'] = $user['rol'];
                 header("Location:bienvenida.php");
                 exit();
             } else {
