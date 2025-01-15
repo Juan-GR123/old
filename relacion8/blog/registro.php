@@ -4,7 +4,7 @@ session_start();
 require_once "./requires/conexion.php";
 
 // Formulario de Registro
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registro'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['botonRegistro'])) {
     // Compruebo que el email es válido
     $email = filter_var(trim($_POST['emailRegistro']), FILTER_VALIDATE_EMAIL);
     // Quito los espacios en blanco al comienzo y final de la contraseña
