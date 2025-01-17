@@ -1,11 +1,14 @@
-<?php 
+<?php
 session_start();
 
 require_once "./requires/conexion.php";
 
 $_SESSION['errorInicioSesion'] = $_SESSION['errorInicioSesion'] ?? 0;
 $_SESSION['ultimoIntento'] = $_SESSION['ultimoIntento'] ?? time();
-
+$_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
+$_SESSION['errorPassLogin'] =  $_SESSION['errorPassLogin'] ?? "";
+$_SESSION['errorEmailLogin'] =  $_SESSION['errorEmailLogin'] ?? "";
+$_SESSION['errorFatal'] =  $_SESSION['errorFatal'] ?? "";
 
 //6. Formulario de inicio de sesión
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SESSION['errorInicioSesion'] < 3) {
@@ -27,18 +30,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
             //los indices son los atributos de la tabla
             if (password_verify($password, $user['password'])) {
                 $_SESSION['errorInicioSesion'] = 0;
-                header("Location:index.php");
-                exit();
+                $_SESSION['loginExito'] = true;
             } else {
-                $_SESSION['errorPassLogin']="La contraseña no es correcta.";
+                $_SESSION['errorPassLogin'] = "La contraseña no es correcta.";
                 $_SESSION['errorInicioSesion']++;
                 $_SESSION['ultimoIntento'] = time(); //Guardo la hora del ultimo fallo
 
+
             }
         } else {
-            $_SESSION['errorEmailLogin']= "El email no existe en nuestra Base de Datos";
+            $_SESSION['errorEmailLogin'] = "El email no existe en nuestra Base de Datos";
         }
+    } else {
+        $_SESSION['errorFatal'] = "El email o la contraseña no son correctas";
     }
+
+    header("Location: index.php");
+    exit();
 }
 
 //7. controlamos los 3 intentos fallidos de inicio de sesión 
@@ -59,6 +67,3 @@ if ($_SESSION['errorInicioSesion'] >= 3) {
         $_SESSION['errorInicioSesion'] = 0;
     }
 }
-
-
-?>
