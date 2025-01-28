@@ -1,16 +1,16 @@
 <?php
-// models/Paciente.php
 
 namespace Models;
 
 use Lib\BaseDatos;
 use PDO;
 
-class Paciente extends BaseDatos
+class Doctor extends BaseDatos
 {
-    private $table = 'pacientes';
+    private $table = 'doctores';
 
-    public function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->connect();
     }

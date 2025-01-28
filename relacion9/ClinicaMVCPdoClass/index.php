@@ -15,5 +15,10 @@ use Controllers\PacienteController;
 $pacienteController = new PacienteController();
 $pacienteController->mostrarTodos();
 
+use Controllers\DoctorController;
+
+$doctorController = new DoctorController();
+$doctorController->mostrarTodos();
+
 // Incluyo el footer de la página
 require_once __DIR__ . '/views/partials/footer.php';
