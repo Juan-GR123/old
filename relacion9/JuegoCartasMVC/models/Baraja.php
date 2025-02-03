@@ -26,7 +26,7 @@ class Baraja {
     }
 
     // Saco la primera carta de la baraja y la elimino de la baraja
-    public function sacarCarta(): ?Carta {
+    public function sacarCarta(): ? Carta {
         $this->barajar();
         return array_shift($this->cartas); 
     }
@@ -36,13 +36,13 @@ class Baraja {
             return [];
         }
 
-        $montones = array_fill(0,$jugadores,[]);
+        $montones = array_fill(0,$jugadores,[]); //crea un array de o a tres(jugadores) posiciones y lo inicializa a un array vacio 
         $index = 0;
 
         $this->barajar();
 
         foreach ($this->cartas as $carta) {
-            $montones[$index % $jugadores][] = $carta;
+            $montones[$index % $jugadores][] = $carta;// se coge el resto de el indice dividido por el id del jugador para que se vayan repartiendo las cartas uno a uno
             $index++;
         }
         return $montones;
