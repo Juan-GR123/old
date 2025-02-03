@@ -23,7 +23,7 @@ class BarajaController {
         $mazo = $this->baraja->getBaraja();
         
         // 2. Mostramos la vista - Muestro el mazo
-        $this->pages->render('baraja/muestraBaraja', ['mazo' => $mazo]);
+        $this->pages->render('baraja/muestraBaraja', ['mazo' => $mazo]); //la vista , [Valores de la vista]
     }
 
     public function sacarCarta(): void {
