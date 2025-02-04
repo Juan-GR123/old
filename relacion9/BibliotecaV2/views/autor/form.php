@@ -2,10 +2,10 @@
 
 extract($data);
 
-if (isset($parsonas)) {   
-    echo "<h1>Modificación de libros</h1>";
+if (isset($personas)) {   
+    echo "<h1>Modificación de autores</h1>";
 } else {
-    echo "<h1>Inserción de libros</h1>";
+    echo "<h1>Inserción de personas</h1>";
 }
 
 
