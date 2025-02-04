@@ -32,14 +32,14 @@
         // --------------------------------- MOSTRAR LISTA DE LIBROS ----------------------------------------
         public function mostrarListaLibros() {
             $data["listaLibros"] = $this->libro->getAll();
-            View::render("libro/all", $data);
+            View::render("libro/all", $data); //le metes en libro/all los valores de data que es una consulta
         }
 
         // --------------------------------- FORMULARIO ALTA DE LIBROS ----------------------------------------
 
         public function formularioInsertarLibros() {
             $data["todosLosAutores"] = $this->persona->getAll();
-            $data["autoresLibro"] = array();  // Array vacío (el libro aún no tiene autores asignados)
+            $data["autoresLibro"] = array();  // Array vacío (el libro aún no tiene autores asignados) //le añade a data una columna nueva
             View::render("libro/form", $data);
         }
 

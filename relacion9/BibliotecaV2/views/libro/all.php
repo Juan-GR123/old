@@ -13,11 +13,11 @@ if (isset($data["error"])) {
   echo "<div style='color:red'>".$data["error"]."</div>";
 }
 
-echo "<form action='index.php'>
-        <input type='hidden' name='action' value='buscarLibros'>
-        <input type='text' name='textoBusqueda'>
-        <input type='submit' value='Buscar'>
-      </form><br>";
+  echo "<form action='index.php'>
+          <input type='hidden' name='action' value='buscarLibros'>
+          <input type='text' name='textoBusqueda'>
+          <input type='submit' value='Buscar'>
+        </form><br>";
 
 // Ahora, la tabla con los datos de los libros
 if (count($listaLibros) == 0) {
