@@ -17,7 +17,7 @@ $apellidos = $apellido -> apellidos ?? "";
 echo "<form action = 'index.php' method = 'get'>
      <input type='hidden' name='idPersona' value='".$idPersona."'><br>
      Nombre:<input type='text' name='nombre' value='".$nombre."'><br>
-     Apellidos:<input type='text' name='apellidos' value='".$apellido."'><br>";
+     Apellidos:<input type='text' name='apellidos' value='".$apellidos."'><br>";
 
 //Finalizamos el formulario
 if (isset($personas)) {

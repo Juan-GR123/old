@@ -1,13 +1,14 @@
-<!-- BIBLIOTECA VERSIÓN 2
+<!-- BIBLIOTECA VERSIÓN 3
      Características de esta versión:
        - Código con arquitectura MVC
-       - Sin capa de abstracción de datos
+       - Un solo controlador
+       - Con capa de abstracción de datos
        - Sin seguridad, sesiones ni control de acceso
 -->
 <?php
     include_once("models/libro.php");  // Modelos
     include_once("models/persona.php");
-    include_once("view.php");   // Plantilla de vista
+    include_once("view.php");          // Plantilla de vista
 
     // Miramos el valor de la variable "action", si existe. Si no, le asignamos una acción por defecto
     if (isset($_REQUEST["action"])) {
@@ -21,8 +22,8 @@
     $biblio->$action();
 
     class Biblioteca {
-        private $db;     // Conexión con la base de datos
-        private $libro, $persona; // Modelos
+        private $db;             // Conexión con la base de datos
+        private $libro, $persona;// Modelos
 
         public function __construct() {
             $this->libro = new Libro();
@@ -32,14 +33,14 @@
         // --------------------------------- MOSTRAR LISTA DE LIBROS ----------------------------------------
         public function mostrarListaLibros() {
             $data["listaLibros"] = $this->libro->getAll();
-            View::render("libro/all", $data); //le metes en libro/all los valores de data que es una consulta
+            View::render("libro/all", $data);
         }
 
         // --------------------------------- FORMULARIO ALTA DE LIBROS ----------------------------------------
 
         public function formularioInsertarLibros() {
             $data["todosLosAutores"] = $this->persona->getAll();
-            $data["autoresLibro"] = array();  // Array vacío (el libro aún no tiene autores asignados) //le añade a data una columna nueva
+            $data["autoresLibro"] = array();  // Array vacío (el libro aún no tiene autores asignados)
             View::render("libro/form", $data);
         }
 
@@ -54,7 +55,6 @@
             $numPaginas = $_REQUEST["numPaginas"];
             $autores = $_REQUEST["autor"];            
 
-            // Le pedimos al modelo que guarde el libro en la BD
             $result = $this->libro->insert($titulo, $genero, $pais, $ano, $numPaginas);
             if ($result == 1) {
                 // Si la inserción del libro ha funcionado, continuamos insertando los autores, pero
@@ -78,7 +78,7 @@
 
         // --------------------------------- BORRAR LIBROS ----------------------------------------
 
-        public function borrarLibro() {
+          public function borrarLibro() {
             // Recuperamos el id del libro que hay que borrar
             $idLibro = $_REQUEST["idLibro"];
             // Pedimos al modelo que intente borrar el libro
@@ -98,7 +98,7 @@
 
         public function formularioModificarLibro() {
             // Recuperamos los datos del libro a modificar
-            $data["libro"] = $this->libro->get($_REQUEST["idLibro"]);
+            $data["libro"] = $this->libro->get($_REQUEST["idLibro"])[0];
             // Renderizamos la vista de inserción de libros, pero enviándole los datos del libro recuperado.
             // Esa vista necesitará la lista de todos los autores y, además, la lista
             // de los autores de este libro en concreto.
@@ -145,107 +145,10 @@
 
         // --------------------------------- MOSTRAR LISTA DE AUTORES ----------------------------------------
         public function mostrarListaAutores() {
-            // Esto está en construcción. Llamaremos a una vista inexistente.
-            $data["listaAutores"] = $this->libro->getAll();
-            View::render("autor/all", $data); //le metes en autor/all los valores de data que es una consulta
-        }        
+            // Esto está sin desarrollar aún. De momento, llamaremos a una vista inexistente.
+            View::render("autor/all");
+        }   
 
-
-        public function formularioInsertarAutores() {
-            $data["todosLosAutores"] = $this->persona->getAll();
-            $data["autoresLibro"] = array();  // Array vacío (el libro aún no tiene autores asignados) //le añade a data una columna nueva
-            View::render("autor/form", $data);
-        }
-
-        public function insertarAutor() {
-            // Primero, recuperamos todos los datos del formulario
-            $idPersona= $_REQUEST["idPersona"];
-            $nombre = $_REQUEST["nombre"];         
-            $apellido = $_REQUEST["apellido"];    
-            $libros = $_REQUEST["libros"];     
-
-            // Le pedimos al modelo que guarde el libro en la BD
-            $result = $this->persona->insert($nombre,$apellido);
-            if ($result == 1) {
-                // Si la inserción del libro ha funcionado, continuamos insertando los autores, pero
-                // necesitamos conocer el id del libro que acabamos de insertar
-                $idPersona = $this->persona->getMaxId();
-                // Ya podemos insertar todos los autores junto con el libro en "escriben"
-                $result = $this->persona->insertAutores($idPersona, $libros);
-                if ($result > 0) {
-                    $data["info"] = "Libro insertado con éxito";
-                } else {
-                    $data["error"] = "Error al insertar los autores del libro";
-                }
-            } else {
-                // Si la inserción del libro ha fallado, mostramos mensaje de error
-                $data["error"] = "Error al insertar el libro";
-            }
-            $data["listaAutores"] = $this->persona->getAll();
-            View::render("autor/all", $data);
-
-        }
-
-
-        public function borrarAutor() {
-            // Recuperamos el id del libro que hay que borrar
-            $idPersona = $_REQUEST["idPersona"];
-            // Pedimos al modelo que intente borrar el libro
-            $result = $this->persona->delete($idPersona);
-            // Comprobamos si el borrado ha tenido éxito
-            if ($result == 0) {
-                $data["error"] = "Ha ocurrido un error al borrar el libro. Por favor, inténtelo de nuevo";
-            } else {
-                $data["info"] = "Libro borrado con éxito";
-            }
-            $data["listaAutores"] = $this->persona->getAll();
-            View::render("autor/all", $data);
-
-        }
-
-
-        public function formularioModificarAutor() {
-            // Recuperamos los datos del libro a modificar
-            $data["persona"] = $this->persona->get($_REQUEST["idPersona"]);
-            // Renderizamos la vista de inserción de libros, pero enviándole los datos del libro recuperado.
-            // Esa vista necesitará la lista de todos los autores y, además, la lista
-            // de los autores de este libro en concreto.
-            $data["todosLosAutores"] = $this->persona->getAll();
-            $data["autoresLibro"] = $this->persona->getAutores($_REQUEST["idLibro"]);
-            View::render("autor/form", $data);
-        }
-
-
-        //no funciona
-        public function modificarAutor() {
-            // Primero, recuperamos todos los datos del formulario
-            $idPersona = $_REQUEST["idPersona"];
-            $nombre = $_REQUEST["nombre"];         
-            $apellido = $_REQUEST["apellido"];    
-            $libros = $_REQUEST["libros"];  
-
-            // Pedimos al modelo que haga el update
-            $result = $this->persona->update($idPersona, $nombre, $apellido);
-            if ($result == 1) {
-                $data["info"] = "Libro actualizado con éxito";
-            } else {
-                // Si la modificación del libro ha fallado, mostramos mensaje de error
-                $data["error"] = "Ha ocurrido un error al modificar el libro. Por favor, inténtelo más tarde";
-            }
-            $data["listaAutores"] = $this->persona->getAll();
-            View::render("autor/all", $data);
-        }
-
-        public function buscarAutores() {
-            // Recuperamos el texto de búsqueda de la variable de formulario
-            $textoBusqueda = $_REQUEST["textoBusqueda"];
-            // Buscamos los libros que coinciden con la búsqueda
-            $data["listaAutores"] = $this->persona->search($textoBusqueda);
-            $data["info"] = "Resultados de la búsqueda: <i>$textoBusqueda</i>";
-            // Mostramos el resultado en la misma vista que la lista completa de libros
-            View::render("autor/all", $data);
-        }
-
+        // -------- LA APLICACIÓN CONTINUARÍA DESARROLLÁNDOSE AÑADIENDO FUNCIONES AQUÍ ------------------------
 
     } // class
-
