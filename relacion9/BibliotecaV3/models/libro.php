@@ -1,7 +1,6 @@
 <?php
 
 // MODELO DE LIBROS
-
 include_once "model.php";
 
 class Libro extends Model
