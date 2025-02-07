@@ -48,5 +48,4 @@ class Seguridad {
         }
         return $text;
     }
-
 }

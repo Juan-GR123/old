@@ -1,9 +1,10 @@
-<!-- ESQUELETO DE UNA WEBAPP MVC HECHA CON PHP CLÁSICO.
-     Características:
+<!-- BIBLIOTECA VERSIÓN 4 (Y ÚLTIMA)
+     Características de esta versión:
        - Arquitectura MVC.
-       - Modelo heredable y capa de abstracción de datos.
+       - Modelo genérico y capa de abstracción de datos.
        - Controladores múltiples.
-       - Capa de seguridad para control de sesiones.
+       - Control de acceso
+       - Capa de seguridad
 -->
 <?php
 
@@ -16,20 +17,20 @@ foreach (glob("controllers/*.php") as $file) {
     include $file;
 }
 
-// Miramos el valor de la variable $controller, si existe. Si no, le asignamos un controlador por defecto
+// Miramos el valor de la variable "controller", si existe. Si no, le asignamos un controlador por defecto
 if (isset($_REQUEST["controller"])) {
     $controller = $_REQUEST["controller"];
 } else {
     $controller = "UsuariosController";  // Controlador por defecto
 }
 
-// Miramos el valor de la variable $function, si existe. Si no, le asignamos una acción por defecto
-if (isset($_REQUEST["function"])) {
-    $function = $_REQUEST["function"];
+// Miramos el valor de la variable "action", si existe. Si no, le asignamos una acción por defecto
+if (isset($_REQUEST["action"])) {
+    $action = $_REQUEST["action"];
 } else {
-    $function = "formLogin";  // Acción por defecto
+    $action = "formLogin";  // Acción por defecto
 }
 
-// Creamos un objeto de tipo $controller y llamamos al método $function()
-$c = new $controller();
-$c->$function();
+// Creamos un objeto de tipo $controller y llamamos al método $action()
+$biblio = new $controller();
+$biblio->$action();

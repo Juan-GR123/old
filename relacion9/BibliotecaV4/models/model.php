@@ -2,12 +2,12 @@
 
 include_once "db.php";
 
-// MODELO BASE DEL QUE HEREDAN EL RESTO DE MODELOS
+// MODELO GENÉRICO
 
 class Model {
 
   protected $table;    // Aquí guardaremos el nombre de la tabla a la que estamos accediendo
-  protected $key;      // Aquí guardaremos el nombre de la columna que contiene el id (por defecto, "id")
+  protected $idColumn; // Aquí guardaremos el nombre de la columna que contiene el id (por defecto, "id")
   protected $db;       // Y aquí la capa de abstracción de datos
 
   public function __construct()  {
@@ -20,12 +20,12 @@ class Model {
   }
 
   public function get($id) {
-    $record = $this->db->dataQuery("SELECT * FROM ".$this->table." WHERE ".$this->key."= $id");
+    $record = $this->db->dataQuery("SELECT * FROM ".$this->table." WHERE ".$this->idColumn."= $id");
     return $record;
   } 
 
   public function delete($id) {
-    $result = $this->db->dataManipulation("DELETE FROM ".$this->table." WHERE ".$this->key." = $id");
+    $result = $this->db->dataManipulation("DELETE FROM ".$this->table." WHERE ".$this->idColumn." = $id");
     return $result;
   }
 }

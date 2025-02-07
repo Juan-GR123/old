@@ -1,0 +1,6 @@
+Cambios con respecto a v3
+
+Modelo genérico y capa de abstracción
+Controladores múltiples
+Control de acceso (login)
+Capa de seguridad
