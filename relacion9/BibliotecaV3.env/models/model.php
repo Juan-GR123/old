@@ -15,8 +15,13 @@ class Model {
   }
 
   public function getAll() {
-    $list = $this->db->dataQuery("SELECT * FROM ".$this->table);
-    return $list;
+    
+      $sql = "SELECT libros.*,personas.nombre, personas.apellido 
+      FROM libros
+      LEFT JOIN escriben ON libros.idLibros = escriben.idLibro
+      LEFT JOIN personas ON escriben.idPersona = personas.idPersona";
+      return $this -> db -> dataQuery($sql);
+    
   }
 
   public function get($id) {

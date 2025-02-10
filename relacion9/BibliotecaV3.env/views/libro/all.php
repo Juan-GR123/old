@@ -3,7 +3,7 @@
 // views/libro/all.php
 
 // Recuperamos la lista de libros
-$listaLibros = $data["listaLibros"];
+$listaLibros = $data["listaLibros"]; 
 
 // Si hay algún mensaje de feedback, lo mostramos
 if (isset($data["info"])) {
